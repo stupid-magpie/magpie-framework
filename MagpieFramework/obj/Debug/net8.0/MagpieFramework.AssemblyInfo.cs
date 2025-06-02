@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MagpieFramework")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d12137aa1d4cd926db555db632233dc1be5f867b")]
 [assembly: System.Reflection.AssemblyProductAttribute("MagpieFramework")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MagpieFramework")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
