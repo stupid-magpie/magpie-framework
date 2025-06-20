@@ -4,5 +4,7 @@
 
 bin/
 obj/
+zig-out/
+.zig-cache/
 
 global.json
