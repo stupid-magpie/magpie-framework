@@ -19,8 +19,6 @@ pub fn main() !void {
     try surface.fillRect(null, surface.mapRgb(128, 30, 255));
     try window.updateSurface();
 
-    lib.fuck();
-
     while (true) {
         switch (try sdl3.events.waitAndPop()) {
             .quit => break,

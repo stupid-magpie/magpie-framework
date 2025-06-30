@@ -1,14 +1,9 @@
-//! By convention, root.zig is the root source file when making a library. If
-//! you are making an executable, the convention is to delete this file and
-//! start with main.zig instead.
 const std = @import("std");
 const sdl3 = @import("sdl3");
+const magpieWindow = @import("windowing/window.zig");
 
-const testing = std.testing;
-
-pub export fn fuck() void {
-    std.debug.print("FUCKKK!!", .{});
-}
+const allocator = std.heap.c_allocator;
+const OpaqueWindow = *anyopaque;
 
 export fn init_sdl() c_int {
     const init_flags = sdl3.InitFlags{ .video = true, .events = true };
@@ -21,10 +16,15 @@ export fn init_sdl() c_int {
     return 0;
 }
 
-pub export fn add(a: i32, b: i32) i32 {
-    return a + b;
-}
-
-test "basic add functionality" {
-    try testing.expect(add(3, 7) == 10);
+pub export fn create_window(
+    title_ptr: [*c]const u8,
+    width: u32,
+    height: u32,
+) ?OpaqueWindow {
+    const title_slice = std.mem.sliceTo(title_ptr, 0);
+    const win = magpieWindow.Window.create(allocator, title_slice, @intCast(width), @intCast(height)) catch |err| {
+        std.debug.print("Failed to create window: {any}\n", .{err});
+        return null;
+    };
+    return win;
 }

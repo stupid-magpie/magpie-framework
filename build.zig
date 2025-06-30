@@ -33,6 +33,10 @@ pub fn build(b: *std.Build) void {
 
     b.installArtifact(lib);
 
+    const window_mod = b.createModule(.{ .root_source_file = b.path("src/windowing/window.zig"), .target = target, .optimize = optimize });
+
+    lib.root_module.addImport("window", window_mod);
+
     const exe = b.addExecutable(.{
         .name = "magpie_framework",
         .root_module = exe_mod,
