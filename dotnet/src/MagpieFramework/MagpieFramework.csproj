@@ -8,10 +8,13 @@
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
 
-    <ItemGroup>
-      <None Update="magpie_framework.dll">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-    </ItemGroup>
-
+    <Target Name="CopyNativeDll" AfterTargets="Build">
+        <PropertyGroup>
+            <NativeDllName>magpie_framework.dll</NativeDllName>
+            <NativeDllSourcePath>..\..\..\zig-out\bin\$(NativeDllName)</NativeDllSourcePath>
+            <NativeDllDestPath>$(OutDir)$(NativeDllName)</NativeDllDestPath>
+        </PropertyGroup>
+        <Copy SourceFiles="$(NativeDllSourcePath)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+        <Message Text="Copied Native DLL from $(NativeDllSourcePath) to $(NativeDllDestPath)" Importance="high" />
+    </Target>
 </Project>
