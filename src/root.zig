@@ -5,7 +5,7 @@ const magpieWindow = @import("windowing/window.zig");
 const allocator = std.heap.c_allocator;
 const OpaqueWindow = *anyopaque;
 
-export fn init_sdl() c_int {
+pub export fn init_sdl() c_int {
     const init_flags = sdl3.InitFlags{ .video = true, .events = true };
 
     sdl3.init(init_flags) catch |err| {

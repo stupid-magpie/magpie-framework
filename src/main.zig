@@ -6,24 +6,15 @@ const SCREEN_WIDTH = 640;
 const SCREEN_HEIGHT = 480;
 
 pub fn main() !void {
-    defer sdl3.shutdown();
-
-    const init_flags = sdl3.InitFlags{ .video = true };
-    try sdl3.init(init_flags);
-    defer sdl3.quit(init_flags);
-
-    const window = try sdl3.video.Window.init("hi", SCREEN_WIDTH, SCREEN_HEIGHT, .{});
-    defer window.deinit();
-
-    const surface = try window.getSurface();
-    try surface.fillRect(null, surface.mapRgb(128, 30, 255));
-    try window.updateSurface();
-
-    while (true) {
-        switch (try sdl3.events.waitAndPop()) {
-            .quit => break,
-            .terminating => break,
-            else => {},
-        }
+    const result = lib.init_sdl();
+    if (result != 0) {
+        std.debug.print("sdl init failed\n", .{});
+        return;
     }
+
+    const win = lib.create_window("", 800, 600) orelse {
+        std.debug.print("Window creation failed\n", .{});
+        return;
+    };
+    std.debug.print("Window created at address: {any}\n", .{win});
 }

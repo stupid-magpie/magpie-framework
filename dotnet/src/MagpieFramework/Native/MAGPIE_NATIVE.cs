@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 namespace MagpieFramework.Native;
 
 internal partial struct MAGPIE_NATIVE {
-    public const string LIB_NAME = "magpie_framework.dll";
+    public const string LIB_NAME = "magpie_framework";
 
     [LibraryImport(LIB_NAME, EntryPoint = "init_sdl")]
     public static partial int InitSDL();    
